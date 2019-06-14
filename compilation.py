@@ -20,23 +20,24 @@ print(dt_link)
 
 
 #Main compilation script
-writeme='''print("Checking dependencies...")
+writeme='''import os as e
+print("Checking dependencies...")
 try:
- check=open("'device/'+'oem2_name'.strip()+'/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'_'+'device2_name'.strip+'.mk'")
+ check=open("device/oem2_name/device2_name'/rom2_name_device2_name.mk'")
  check.close()
 except:
  print("Device tree absent! Are you drunk? Cloning now!!")
  e.system("git clone dt2_link")
  
 try:
- check=open("'vendor/'+'oem2_name'.strip()+'/'+'device2_name'.strip()+'/'+'device2_name'.strip()+'-vendor.mk'")
+ check=open("vendor/oem2_name/device2_name/device2_name-vendor.mk")
  check.close()
 except:
  print("Vendor tree absent! Go wash your face, you noob! Cloning now!!")
  e.system("git clone vt2_link")
  
 try:
- check=open("'kernel/'+'oem2_name'.strip()+'/'+'device2_kernel_name'.strip()+'/'+'device2_name'.strip()+'_defconfig'")
+ check=open("kernel/oem2_name/device2_kernel_name/device2_name_defconfig")
  check.close()
 except:
  print("Kernel tree absent! You pathetic person? Cloning now!!")
@@ -51,7 +52,7 @@ e.system("export USE_CCACHE=1")
 e.system("prebuilts/misc/linux-x86/ccache/ccache -M 100G")
 e.system("export CCACHE_COMPRESS=1")
 e.system(". b*/e*")
-e.system("'lunch'+'rom2_name'.strip()+'_'+'device2_name'.strip()+'-userdebug'")
+e.system("'lunch rom2_name_device2_name-userdebug")
 e.system("make -j$(nproc --all)")
 
 try:
@@ -99,7 +100,9 @@ except:
               time.sleep(3600)
               romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
               romchex.close()
-              e.system("bash uploader.sh")'''
+              e.system("bash uploader.sh")
+             except:
+              print(GO DIE YOU NOOB")'''
 
 
 #writeme2="function transfer() {
