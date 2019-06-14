@@ -1,55 +1,155 @@
-//ROM compilation python programme
-import subprocesses as e
-
-//File Checker
-def FE(fileNameStr):
-return path.exists(fileNameStr)
-
-K = "Dependency exists"
-KN = "A dependency doesn't exist, cloning"
-
-e.call("function tg_SendMsg() {	curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d "parse_mode=markdown" -d text="$1 " -d chat_id=$CHAT_ID}")
-
-print ("Select the device: ")
-v = input("1. Santoni") 
-print(v)
-if (v == 1 or Santoni):
-  print("Checking dependencies")
-  FE("kernel/xiaomi/msm8937/arch/arm64/           configs/santoni_treble-defconfig");
-  if (FE == true):
-    print(K)
-  else
-    print(KN)
-    e.call("git clone https://github.com/Dhruvgera/RockstarKernel-r4x -b rom-non_oc kernel/xiaomi/msm8937")
-    FE("device/xiaomi/santoni/cerberus_santoni.mk");
-  if (FE == true):
-    print(K)
-  else
-    print(KN)
-    e.call("git clone https://github.com/Dhruvgera/device_xiaomi_santoni device/xiaomi/santoni")
-    FE("vendor/xiaomi/santoni");
-  if (FE == true):
-    print(K)
-  else
-    print(KN)
-    e.call("")    
-    print("Building ROM now!")
-    e.call("export USE_CCACHE=1")
-    e.call("prebuilts/misc/linux-x86/ccache/ccache -M 100G")
-    e.call("export CCACHE_COMPRESS=1")
-    e.call(". b*/e*")
-    e.call("lunch cerberus_santoni-userdebug")
-    e.call("mka cerberus")
+#ROM compilation personalised python prgramme maker
+import os as e 
+import time
+rom_name=input("Enter ROM name (In lowercase): ")
+print(rom_name)
+device_name=input("Enter device name (In lowercase): ")
+print(device_name)
+oem_name=input("Enter device manufacturer's name (In lowercase): ")
+print(oem_name)
+device_kernel_name=input("Enter your device chipset's codename: ")
+print(device_kernel_name)
+vt_link=input("Enter your vendor tree link: ")
+print(vt_link)
+kt_link=input("Enter your kernel tree link: ")
+print(kt_link)
+dt_link=input("Enter your device tree link: ")
+print(dt_link)
 
 
-//Upload ROM to tg
 
-e.call("function tg_SendDoc() {	curl -F chat_id=$CHAT_ID -F document=@"$1" -F caption="$2" https://api.telegram.org/bot$BOT_API_KEY/sendDocument}")
 
-e.call("export $CHAT_ID=")
-e.call("export $BOT_API_KEY=")
+#Main compilation script
+writeme='''print("Checking dependencies...")
+try:
+ check=open("'device/'+'oem2_name'.strip()+'/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'_'+'device2_name'.strip+'.mk'")
+ check.close()
+except:
+ print("Device tree absent! Are you drunk? Cloning now!!")
+ e.system("git clone dt2_link")
+ 
+try:
+ check=open("'vendor/'+'oem2_name'.strip()+'/'+'device2_name'.strip()+'/'+'device2_name'.strip()+'-vendor.mk'")
+ check.close()
+except:
+ print("Vendor tree absent! Go wash your face, you noob! Cloning now!!")
+ e.system("git clone vt2_link")
+ 
+try:
+ check=open("'kernel/'+'oem2_name'.strip()+'/'+'device2_kernel_name'.strip()+'/'+'device2_name'.strip()+'_defconfig'")
+ check.close()
+except:
+ print("Kernel tree absent! You pathetic person? Cloning now!!")
+ e.system("git clone kt2_link")
+ 
+print("All dependencies are done!")
 
-e.call("$FINAL_ZIP=$HOME/cerberus/out/target/product/santoni/Cerberus*")
-e.call("tg_SendDoc "$FINAL_ZIP"")
-else:
-e.call("tg_SendMsg "Zip Creation Failed "")
+#Begin ROM compilation
+
+print("Building ROM now!")
+e.system("export USE_CCACHE=1")
+e.system("prebuilts/misc/linux-x86/ccache/ccache -M 100G")
+e.system("export CCACHE_COMPRESS=1")
+e.system(". b*/e*")
+e.system("'lunch'+'rom2_name'.strip()+'_'+'device2_name'.strip()+'-userdebug'")
+e.system("make -j$(nproc --all)")
+
+try:
+ romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+ romchex.close()
+ e.system("bash uploader.sh")
+except:
+ try:
+  time.sleep(3600)
+  romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+  romchex.close()
+  e.system("bash uploader.sh")
+ except:
+   try:
+    time.sleep(3600)
+    romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+    romchex.close()
+    e.system("bash uploader.sh")
+   except:
+      try:
+       time.sleep(3600)
+       romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+       romchex.close()
+       e.system("bash uploader.sh")
+      except:
+        try:
+         time.sleep(3600)
+         romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+         romchex.close()
+         e.system("bash uploader.sh")
+        except:
+           try:
+            time.sleep(3600)
+            romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+            romchex.close()
+            e.system("bash uploader.sh")
+           except:
+            try:
+             time.sleep(3600)
+             romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+             romchex.close()
+             e.system("bash uploader.sh")
+            except:
+             try:
+              time.sleep(3600)
+              romchex=open("'out/target/product/'+'device2_name'.strip()+'/'+'rom2_name'.strip()+'*'")
+              romchex.close()
+              e.system("bash uploader.sh")'''
+
+
+#writeme2="function transfer() {
+ #   zipname="$(echo $1 | awk -F '/' '{print $NF}')";
+  #  url="$(curl -# -T $1 https://transfer.sh)";
+   # printf '\n';
+   # echo -e "Download ${zipname} at ${url}";
+   # curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="$url" -d chat_id=$CHAT_ID
+   # curl -F chat_id="$CHAT_ID" -F document=@"${ZIP_DIR}/$ZIPNAME" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
+#}
+
+#export ZIPDIR = "out/target/product/'+device2_name+'/'"
+#export ZIPNAME = "rom2_name*";
+#export BOT_API_KEY = botapikey2
+#export CHAT_ID = chatid2
+
+#transfer();"
+
+
+saveFile=open(device_name.strip()+'.py'.strip(),'w')
+saveFile.write(str(writeme))
+saveFile.close()
+
+'''saveFile2=open("uploader.sh","w")
+saveFile2.write(str(writeme2))
+saveFile2.close()'''
+
+s = open(device_name.strip()+'.py'.strip()).read()
+s = s.replace('device2_name', device_name)
+s = s.replace('rom2_name',rom_name)
+s = s.replace('oem2_name',oem_name)
+s = s.replace('device2_kernel_name',device_name)
+s = s.replace('vt2_link', vt_link)
+s = s.replace('kt2_link', kt_link)
+s = s.replace('dt2_link', dt_link)
+f = open(device_name.strip()+'.py'.strip(), 'w')
+f.write(s)
+f.close()
+
+'''s = open("uploader.sh").read()
+s = s.replace('device2_name', '"'+device_name+'"')
+s = s.replace('rom2_name', '"'+rom_name+'"')
+s = s.replace('oem2_name', '"'+oem_name+'"')
+s = s.replace('device2_kernel_name', '"'+device_name+'"')
+s = s.replace('vt2_name', '"'+device_name+'"')
+s = s.replace('kt2_name', '"'+device_name+'"')
+s = s.replace('dt2_name', '"'+device_name+'"')
+f = open("device_name'.txt'", 'w')
+f.write(s)
+f.close()
+''' 
+
+e.system('python3'+' '+device_name.strip()+'.py'.strip()) 
