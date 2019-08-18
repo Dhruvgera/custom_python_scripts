@@ -4,9 +4,8 @@ import glob
 import subprocess
 import select
 
-cmd = subprocess.Popen(['bash'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-e.environ["CHAT_ID"]="-1001321444736"
-e.environ["BOT_API_KEY"]="759937652:AAGuSF5aj6nzkBjpMiJ4TMdNopPK_qbP-dQ"
+#cmd = subprocess.Popen(['bash'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
 
 print("ROM Builder script by: ")
 print(" ______   __   __  ______    __   __  __   __    _______  _______  ______    _______ ")
@@ -53,7 +52,8 @@ try:
     chexlast=pen("start.sh")
     chexlast.close()
 except:
-    buildcode='''. b*/e*
+    buildcode='''#!/bin/bash
+. b*/e*
 lunch cerberus_q-userdebug
 make cerberus -j$(nproc --all)'''
     saves=open("start.sh",'w')
@@ -145,5 +145,10 @@ if (q=="Santoni" or "santoni"):
     fixx = fixx.replace('q',q)
     with open("start.sh",'w') as file:
         file.write(fixx)
-    e.system("./start.sh")
+ #   e.system("./start.sh")
+ #   subprocess.call(['. b*/e* && lunch cerberus_santoni-userdebug && make cerberus -j$(nproc --all)'])
+#    subprocess.call(['./start.sh'])
+    process = subprocess.Popen('start.sh', shell=True, stdout=subprocess.PIPE)  
+    process.wait()
     e.system("python3 largest.py")
+
