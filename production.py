@@ -33,7 +33,7 @@ os.environ["largest"] = largest
 import subprocess
 import select
 cmd = subprocess.Popen(['bash'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-os.system["bash upload.sh"]'''
+os.system("$PWD/upload.sh")'''
 		saveFile2=open("largest.py",'w')
 		saveFile2.write(str(codefs))
 		saveFile2.close()
@@ -88,6 +88,6 @@ os.system["bash upload.sh"]'''
 	with open("start.sh",'w') as file:
 		file.write(fixx)
 	e.system("chmod +x $PWD/start.sh")
-	process = subprocess.Popen('$HOME/cygnus/start.sh', shell=True, stdout=subprocess.PIPE)  
-	process.wait()
+	p=subprocess.Popen(['$PWD/start.sh'], shell=True, executable="/bin/bash")
+	p.wait()
 	e.system("python3 largest.py")
