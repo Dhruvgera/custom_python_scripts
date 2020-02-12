@@ -6,3 +6,6 @@ A python programme with some bash, can take basic inputs to create a personalise
 
 # build.py:
 A python program, once again, but this time made for CerberusOS team so that they can compile stuff in one go!!!
+
+# sftp.py:
+A python program to find the largest file in your requested directory and automatic uploads to sftp clients such as sourceforge
