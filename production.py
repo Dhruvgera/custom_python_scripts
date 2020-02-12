@@ -28,8 +28,18 @@ for i in range(0,n):
 		chex2.close()
 	except:
 		codefs='''import os, glob
-largest = sorted( (os.path.getsize(s), s) for s in glob.glob('out/target/product/q/*.zip') )[-1][1]
-os.environ["largest"] = largest
+objects = os.listdir("out/target/product/q/")
+
+sofar = 0
+name = ""
+
+for item in objects:
+        size = os.path.getsize(item)
+        if size > sofar:
+                sofar = size
+                name = "out/target/product/q/"+item
+
+os.environ["name"] = largest
 import subprocess
 import select
 cmd = subprocess.Popen(['bash'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -52,7 +62,7 @@ os.system("$PWD/upload.sh")'''
 		uploadcode='''export ZIPNAME=$largest
 		export CHAT_ID=""
                 export BOT_API_KEY=""
-                curl -F chat_id="$CHAT_ID" -F document=@"out/target/product/q/$ZIPNAME" -F caption="Build completed for device q" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
+                curl -F chat_id="$CHAT_ID" -F document=@"$ZIPNAME" -F caption="Build completed for device q" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
                 curl -F chat_id="$CHAT_ID" -F document=@"$HOME/cygnus/log.txt" -F caption="Build Log" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
                 rm -rf log.txt device/* vendor/* 
                 cd && cd scripts && bash aio.sh && cd $HOME/cygnus
