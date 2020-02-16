@@ -1,6 +1,6 @@
 # Copyright (C) 2020 Dhruv Gera
 import os
-print("Incrementals are made using target zips which are found under out/target/product/device/obj/PACKAGING") 
+print("Incrementals are made using target zips which are found under out/target/product/device/obj/PACKAGING/target_files_intermediates") 
 old_zip=input("Enter old target file path: ")
 new_zip=input("Enter new target file path: ")
 print("Generating incremental package")
