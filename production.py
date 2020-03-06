@@ -28,7 +28,7 @@ for i in range(0,n):
 		chex2.close()
 	except:
 		codefs='''import os, glob
-objects = os.listdir("out/target/product/q/")
+objects = os.listdir("$PWD")
 
 sofar = 0
 name = ""
@@ -43,7 +43,7 @@ os.environ["name"] = largest
 import subprocess
 import select
 cmd = subprocess.Popen(['bash'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-os.system("$PWD/upload.sh")'''
+os.system("bash $PWD/upload.sh")'''
 		saveFile2=open("largest.py",'w')
 		saveFile2.write(str(codefs))
 		saveFile2.close()
@@ -60,13 +60,12 @@ os.system("$PWD/upload.sh")'''
     		chex3.close()
 	except:
 		uploadcode='''export ZIPNAME=$largest
-		export CHAT_ID=""
-                export BOT_API_KEY=""
                 curl -F chat_id="$CHAT_ID" -F document=@"$ZIPNAME" -F caption="Build completed for device q" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
                 curl -F chat_id="$CHAT_ID" -F document=@"$HOME/cygnus/log.txt" -F caption="Build Log" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
-                rm -rf log.txt device/* vendor/* 
-                cd && cd scripts && bash aio.sh && cd $HOME/cygnus
-                make clean'''
+		make clean
+                rm -rf log.txt device/* vendor/*  hardware/* commonsys*
+                repo sync -j$(nproc --all) --force-sync --no-tags --no-clone-bundle --prune --optimized-fetch
+                '''
 		saveFile69=open("upload.sh",'w')
 		saveFile69.write(str(uploadcode))
 		saveFile69.close()
@@ -84,12 +83,10 @@ os.system("$PWD/upload.sh")'''
 		chexlast.close()
 	except:
 		buildcode='''#!/bin/bash
-		export CHAT_ID=""
-		export BOT_API_KEY=""
 		. b*/e*
 		lunch cygnus_q-userdebug
 		curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="Build Scheduled for q has started" -d chat_id=$CHAT_ID
-		make bacon -j$(nproc --all) | tee log.txt'''
+		mka cygnus | tee log.txt'''
 		saves=open("start.sh",'w')
 		saves.write(str(buildcode))
 		saves.close()
@@ -98,6 +95,7 @@ os.system("$PWD/upload.sh")'''
 	with open("start.sh",'w') as file:
 		file.write(fixx)
 	e.system("chmod +x $PWD/start.sh")
+	e.system("chmod +x $PWD/upload.sh")
 	p=subprocess.Popen(['$PWD/start.sh'], shell=True, executable="/bin/bash")
 	p.wait()
 	e.system("python3 largest.py")
