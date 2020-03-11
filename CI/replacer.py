@@ -4,7 +4,7 @@ import time
 import glob
 import subprocess
 import select
-devicename=input("Enter device name")
+devicename="device_name_here"
 fin = open("uploader.py", "rt")
 data = fin.read()
 data = data.replace('q', devicename)
