@@ -8,4 +8,7 @@ python3 $HOME/cygnus/replacer.py
 bash $HOME/cygnus/start.sh
 python3 uploader.py
 sed -i "s/$devicename/device_name_here/g" replacer.py
-
+sed -i "s/$devicename/q/g" start.sh
+sed -i "s/$devicename/q/g" uploader.py
+cd $HOME/cygnus
+make clean 
