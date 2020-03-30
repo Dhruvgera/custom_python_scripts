@@ -8,6 +8,6 @@ export CCACHE_EXEC=$(command -v ccache)
 export CCACHE_BASEDIR="$HOME/.ccache"
 . b*/e*
 lunch cygnus_q-userdebug
-curl -F chat_id=$CHAT_ID  -F text="Build scheduled for q started" https://api.telegram.org/bot$BOT_API_KEY/sendMessage
+curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="Build Scheduled for q started" -d chat_id=$CHAT_ID
 mka cygnus | tee log.txt
 

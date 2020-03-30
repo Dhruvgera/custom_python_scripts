@@ -3,7 +3,7 @@ Python scripts written by me to automate ROM compilation and upload them. Will b
 
 # CI:
 Split of up some code, perfectly working. Export your device name as export devicename="your beloved phone's codename", add your CHAT_ID and BOT_API_KEY in upload.sh and run main.sh. The programs will
-run in coordination and build the ROM, upload the target files and rom zip(Add the respective zip path, cygnus generates it in the ROM dir only) to bashupload and send the resulting build log and zip to you. This setup can be used along with Jenkins to provide a seamless experience to maintainers.
+run in coordination and build the ROM, upload the target files and rom zip(Add the respective zip path, cygnus generates it in the ROM dir only) to sourceforge and send the resulting build log and zip to you. This setup can be used along with Jenkins to provide a seamless experience to maintainers.
 
 
 # production.py:
