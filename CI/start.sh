@@ -8,6 +8,9 @@ export CCACHE_EXEC=$(command -v ccache)
 export CCACHE_BASEDIR="$HOME/.ccache"
 . b*/e*
 lunch cygnus_q-userdebug
-curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d text="Build Scheduled for q started" -d chat_id=$CHAT_ID
+function SendMsg() {  
+curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d "parse_mode=markdown" -d text="$1" -d chat_id=$CHAT_ID 1> /dev/null 
+}
+SendMsg "Build scheduled for q started";
 mka cygnus | tee log.txt
 
