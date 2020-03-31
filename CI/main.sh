@@ -16,7 +16,7 @@ wait
 python3 $HOME/cygnus/tgt.py
 wait
 sed -i "s/$devicename/device_name_here/g" $HOME/cygnus/replacer.py
-sed -i "s/$devicename/q/g" $HOME/cygnus/start.sh
+sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/start.sh
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/rom.py
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/tgt.py
 cd $HOME/cygnus

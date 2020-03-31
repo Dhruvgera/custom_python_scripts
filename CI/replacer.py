@@ -8,7 +8,7 @@ devicename="device_name_here"
 
 fin = open("start.sh", "rt")
 data = fin.read()
-data = data.replace('q', devicename)
+data = data.replace('sampledevice', devicename)
 fin.close()
 
 fin = open("start.sh", "wt")
