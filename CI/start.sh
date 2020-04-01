@@ -1,7 +1,5 @@
 #!/bin/bash
 # Copyright (C)  Dhruv Gera
-export CHAT_ID=""
-export BOT_API_KEY=""
 export USE_NINJA=true
 export USE_CCACHE=1
 export CCACHE_EXEC=$(command -v ccache)

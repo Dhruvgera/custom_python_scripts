@@ -1,4 +1,9 @@
 # Copyright (C)  Dhruv Gera
+echo -e "AUTOMATER by Dhruv Gera";
+export BOT_API_KEY=""
+export CHAT_ID=""
+export SF_USR=""
+export SF_PASS=""
 mv $PWD/scripts/CI/upload.sh $HOME/cygnus/
 mv $PWD/scripts/CI/replacer.py $HOME/cygnus/
 mv $PWD/scripts/CI/start.sh $HOME/cygnus/
@@ -11,14 +16,28 @@ python3 $HOME/cygnus/replacer.py
 wait
 bash $HOME/cygnus/start.sh
 wait
-python3 $HOME/cygnus/rom.py
-wait
-python3 $HOME/cygnus/tgt.py
-wait
+ZIP=$HOME/cygnus/*zip
+if [[ ! -f "${ZIP}" ]]; then
+   echo -e "Build failed :p";
+   function SendMsg() {  
+   curl -s -X POST https://api.telegram.org/bot$BOT_API_KEY/sendMessage -d "parse_mode=markdown" -d text="$1" -d chat_id=$CHAT_ID 1> /dev/null 
+   }
+   SendMsg "Build has failed! Check the logs please";
+   cd $HOME/cygnus
+   grep -iE 'crash|error|fail|fatal' "log.txt" &> "trimmed.txt"
+   curl -F chat_id="$CHAT_ID" -F document=@"trimmed.txt" -F caption="Woah, I trimmed them for you" https://api.telegram.org/bot$BOT_API_KEY/sendDocument
+   cd $HOME/cygnus/scripts/CI/
+else
+   python3 $HOME/cygnus/rom.py
+   wait
+   python3 $HOME/cygnus/tgt.py
+   wait
+fi
 sed -i "s/$devicename/device_name_here/g" $HOME/cygnus/replacer.py
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/start.sh
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/rom.py
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/tgt.py
 cd $HOME/cygnus
 make clean 
-rm -rf log.txt
+rm log.txt
+rm *md5sum

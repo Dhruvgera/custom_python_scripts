@@ -6,17 +6,20 @@ import pysftp
 import sys
 import glob
 
+usr=os.environ["SF_USR"]
+passw=os.environ["SF_PASS"]
+
 # Your particulars for accessing the sftp client
 myHostname = "frs.sourceforge.net"
-myUsername = "your username"
-myPassword = "your password"
+myUsername = usr
+myPassword = passw
 
 # Device name is here for rom builds, as we need it in the out folder's name
 devicename="sampledevice"
 
 # Zip finder
 objects = os.listdir("out/target/product/"+devicename+"/obj/PACKAGING/target_files_intermediates/") # Replace with the dir you want to search in
-
+os.system("rm out/target/product/sampledevice/obj/PACKAGING/target-files_intermediates/*.list")
 for file in os.listdir("out/target/product/"+devicename+"/obj/PACKAGING/target_files_intermediates/"):
     if file.endswith(".zip"):
         print(file)
@@ -31,9 +34,6 @@ with pysftp.Connection(host=myHostname, username=myUsername, password=myPassword
         # Obtain structure of the remote directory 
 	directory_structure = sftp.listdir_attr()
 
-        # Print data
-	for attr in directory_structure:
-        	print (attr.filename, attr)
 
 	localFilePath = ("out/target/product/"+devicename+"/obj/PACKAGING/target_files_intermediates/"+file) # The path where your file is stored on your drive
 	remoteFilePath = (file) # The path where you want to upload
