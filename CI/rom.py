@@ -16,13 +16,18 @@ myPassword = passw
 # Device name is here for rom builds, as we need it in the out folder's name
 devicename="sampledevice"
 
-# Zip fle finder
+# Largest file finder
 objects = os.listdir(".") # Replace with the dir you want to search in
 
-for file in os.listdir(".'"):
-    if file.endswith(".zip"):
-        print(file)
-os.environ["largest"] = file
+sofar = 0
+name = ""
+
+for item in objects:
+        size = os.path.getsize(item) 
+        if size > sofar:
+                sofar = size
+                name = item
+os.environ["largest"] = name
 # Sourceforge or any other sftp client uploader script
 
 with pysftp.Connection(host=myHostname, username=myUsername, password=myPassword) as sftp:
