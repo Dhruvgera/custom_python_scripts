@@ -1,15 +1,15 @@
 # Copyright (C)  Dhruv Gera
 echo -e "AUTOMATER by Dhruv Gera";
-export BOT_API_KEY=""
-export CHAT_ID=""
-export SF_USR=""
-export SF_PASS=""
+export BOT_API_KEY="your key goes here"
+export CHAT_ID="chat it goes here"
 mv $PWD/scripts/CI/upload.sh $HOME/cygnus/
 mv $PWD/scripts/CI/replacer.py $HOME/cygnus/
 mv $PWD/scripts/CI/start.sh $HOME/cygnus/
 mv $PWD/scripts/CI/rom.py $HOME/cygnus/
 mv $PWD/scripts/CI/tgt.py $HOME/cygnus/
+mv $PWD/scripts/CI/nuker.py $HOME/cygnus/
 sed -i "s/device_name_here/$devicename/g" $HOME/cygnus/replacer.py
+sed -i "s/device_name_here/$devicename/g" $HOME/cygnus/nuker.py
 sed -i "s/sampledevice/$devicename/g" $HOME/cygnus/rom.py
 sed -i "s/sampledevice/$devicename/g" $HOME/cygnus/tgt.py
 python3 $HOME/cygnus/replacer.py
@@ -32,14 +32,15 @@ if ! globexists Cygnus* ; then
 else
    python3 $HOME/cygnus/rom.py
    wait
-   python3 $HOME/cygnus/tgt.py
-   wait
 fi
 sed -i "s/$devicename/device_name_here/g" $HOME/cygnus/replacer.py
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/start.sh
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/rom.py
 sed -i "s/$devicename/sampledevice/g" $HOME/cygnus/tgt.py
 cd $HOME/cygnus
-make clean 
+. b*/e* && make clean 
 rm log.txt
 rm *md5sum
+python3 $HOME/cygnus/nuker.py
+sed -i "s/$devicename/device_name_here/g" $HOME/cygnus/nuker.py
+rm -rf .repo/local_manifests trimmed.txt
