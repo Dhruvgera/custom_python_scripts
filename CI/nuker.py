@@ -1,4 +1,4 @@
-import json,glob
+import json,glob,os
 
 device_name = "device_name_here"
 
@@ -8,6 +8,6 @@ def nuke():
     with open(path_to_dep) as file:
         json_data = json.loads(file.read())
         for repos in json_data:
-            print(f"rm -rf {repos['target_path']}")
+            os.system(f"rm -rf {repos['target_path']}")
 
 nuke()
