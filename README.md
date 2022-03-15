@@ -1,5 +1,5 @@
-# python_custom_scripts
-Python scripts written by me to automate ROM compilation and upload them. Will be adding more scripts for choosing which kernel to install while flashing ROMs soon!  
+# custom_python_scripts ( bash too )
+Python scripts written by me to automate ROM compilation and upload them. Also automate mundane tasks like pushing loads of repos, cron jobs, backups etc.
 
 # CI (AUTOMATER):
 A combination of various programs, with the addition of few variables like CHAT_ID etc. , this can do:
@@ -8,7 +8,8 @@ A combination of various programs, with the addition of few variables like CHAT_
 - Send message about the build status
 - Upload the build and target files to any SFTP client
 - Send you the direct download links 
-- Send the build log
+- Send the build log 
+- Upload builds to CLI services and send links to Telegram
 - If the build fails, abort other statements, and send you trimmed build logs
 - Clean everything and restore the server to the previous state
 - Can be integrated with Jenkins to provide 1 click builds
