@@ -13,14 +13,11 @@ git init
 echo "Backups for minecraftbutcursed.com world" > README.md
 
 # Zip all the world folders into a file
-zip -r backup.zip *
+zip -r -s 100m backup.zip *
 
-# Do Git LFS thingies
-git lfs install
-git lfs track backup.zip
-git add .gitattributes
-git add README.md
-git add backup.zip
+# Do Git thingies
+cd $HOME/backups
+git add README.md backup*
 git commit -m "New Backup"
 
 # Force push the file
