@@ -19,3 +19,4 @@ for i in device_list:
         os.system("ftp-upload -h IP -u USERNAME --password YOUR_PASS -d $devicename/ $filename")
     else:
         pass
+os.system("rm $filename")
