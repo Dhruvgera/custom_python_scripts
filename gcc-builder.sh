@@ -6,6 +6,7 @@ rm -rf gcc-arm64/*
 git clone https://github.com/mvaisakh/gcc-build.git
 cd gcc-build
 ./build-gcc.sh -a arm64
+./build-lld.sh -a arm64
 cd ../gcc-arm64
 bash $HOME/gcc-builds/gcc-build/strip-binaries.sh
 git add . -f
@@ -15,9 +16,10 @@ git push git@github.com:Dhruvgera/EvaGCC-arm64.git HEAD:master
 cd ..
 git clone https://github.com/Dhruvgera/EvaGCC-arm gcc-arm
 rm -rf gcc-arm/* gcc-arm64 gcc-build
-git clone https://github.com/mvaisakh/gcc-build.git
+git clone git@github.com:Dhruvgera/gcc-build.git
 cd gcc-build
 ./build-gcc.sh -a arm
+./build-lld.sh -a arm
 cd ../gcc-arm
 bash $HOME/gcc-builds/gcc-build/strip-binaries.sh
 git add . -f
