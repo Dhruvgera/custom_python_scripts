@@ -9,7 +9,7 @@ networks:
 
 services:
   unbound:
-    image: "mvance/unbound-rpi:latest"
+    image: "mvance/unbound-rpi:latest" # "mvance/unbound:latest" if you use x86
     container_name: unbound
     restart: unless-stopped
     hostname: "unbound"
