@@ -39,3 +39,13 @@ Yeah, I know it's bash. A simple program which does the following stuff:
 - Cleans up the directory afterwards
 - Also can upload builds to transfer.sh, if you want it to
 - Some other miscellaneous stuff
+
+# sshtunnel.ps1 :
+
+Yes, powershell is also here now
+
+- Reverse ssh tunnel in background
+- Forward multiple ports
+- Kill older ports connection in case connection suddenly dies and remote server ports are stuck
+- Make sure to enable Gatewayports and clientaliveinterval in sshd_config to prevent death on idle
+- Run this on boot with Task Scheduler to automate the entire thing
